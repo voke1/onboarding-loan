@@ -16,6 +16,7 @@ import styles from './styles';
 
 const LandingScene = (props) => {
   const { navigation } = props;
+  console.log('landing props: ', props);
 
   return (
     <BaseScene
@@ -31,7 +32,7 @@ const LandingScene = (props) => {
       <ImageBackground
         imageStyle={{
           backgroundColor: 'rgba(0, 0, 0, 1)',
-          opacity: .65,
+          opacity: 0.65,
         }}
         resizeMethod="scale"
         resizeMode="cover"
@@ -69,7 +70,7 @@ const LandingScene = (props) => {
                 backgroundColor: COLOUR_GREEN,
               }}
             >
-              <NbText>LOGIN</NbText>
+              <NbText>LOGIN </NbText>
             </Button>
           </View>
         </View>

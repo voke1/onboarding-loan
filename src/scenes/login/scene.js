@@ -54,22 +54,23 @@ class LoginScene extends Component {
     });
     // navigation.navigate('HomeScene');
 
-    const { status, response } = await this.auth.login(
+    const status = await this.auth.login(
       email,
       password
     )
-    
-    const { error } = response
+    console.log('STATUS: ', status)
 
-    if (status === ERROR_STATUS) {
+    // const { error } = response
+
+    if (!status.response.success) {
       Alert.alert(
-        error || 'An error occured. Please, check the data and try again!'
+        'An error occured. Please, check the data and try again!'
       );
     }
 
     else {
-      const { token } = response;
-      saveAuthToken(token);
+      // const { token } = response;
+      // saveAuthToken(token);
       navigation.replace('HomeScene');
     }
 
@@ -77,7 +78,7 @@ class LoginScene extends Component {
       isLoading: false,
     });
 
-    console.log(status, response)
+    // console.log(status, response)
   }
 
   render() {
