@@ -57,12 +57,21 @@ const LandingScene = (props) => {
                 },
               }}
             >
-              SMEDAN
+              ZOJATECH
             </Text>
             <Text big bold white>Empowering MSMEs.</Text>
           </View>
 
           <View style={styles.buttonContainer}>
+            <Button
+              block
+              onPress={() => navigation.replace('RegisterScene')}
+              style={{
+                backgroundColor: COLOUR_GREEN,
+              }}
+            >
+              <NbText>SIGN UP </NbText>
+            </Button>
             <Button
               block
               onPress={() => navigation.replace('LoginScene')}

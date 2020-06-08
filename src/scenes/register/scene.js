@@ -29,7 +29,7 @@ import Auth from '../../services/api/resources/auth';
 import { ERROR_STATUS } from '../../constants/api';
 import { saveAuthToken } from '../../utils/auth';
 
-class LoginScene extends Component {
+class RegisterScene extends Component {
   auth = new Auth();
 
   constructor() {
@@ -41,12 +41,14 @@ class LoginScene extends Component {
 
     this.emailInput = React.createRef();
     this.passwordInput = React.createRef();
-
-    this.onLogin = this.onLogin.bind(this);
+    this.firstvNameInput = React.createRef();
+    this.lastNameInput = React.createRef();
+    this.mobileInput = React.createRef();
+    this.onRegister = this.onRegister.bind(this);
   }
 
-  async onLogin() {
-    const { email, password } = this.state;
+  async onRegister() {
+    const { firstName, lastName, email, mobile, password } = this.state;
     const { navigation } = this.props;
 
     this.setState({
@@ -54,8 +56,11 @@ class LoginScene extends Component {
     });
     // navigation.navigate('HomeScene');
 
-    const result = await this.auth.login(
+    const result = await this.auth.register(
+      firstName,
+      lastName,
       email,
+      mobile,
       password
     )
     console.log('STATUS: ', result)
@@ -96,7 +101,7 @@ class LoginScene extends Component {
           }}
         >
           <Body>
-            <Title>Login</Title>
+            <Title>Register</Title>
           </Body>
           <Right />
         </Header>
@@ -107,7 +112,7 @@ class LoginScene extends Component {
               bold
               green
             >
-              Welcome Back
+              Welcome
             </Text>
             <Text
               green
@@ -117,6 +122,27 @@ class LoginScene extends Component {
             </Text>
           </View>
           <Form>
+            <TextInput
+              autoCapitalize={'none'}
+              inputLabel="First Name"
+              keyboardType="first-name"
+              onValueChange={(firstName) => this.setState({
+                firstName
+              })}
+              textContentType="firstName"
+              textInputRef={this.firstNameInput}
+            />
+            <TextInput
+              autoCapitalize={'none'}
+              inputLabel="Last Name"
+              keyboardType="last-name"
+              onValueChange={(LastName) => this.setState({
+                LastName
+              })}
+              textContentType="lastName"
+              textInputRef={this.lastNameInput}
+
+            />
             <TextInput
               autoCapitalize={'none'}
               inputLabel="Email"
@@ -130,6 +156,17 @@ class LoginScene extends Component {
                 email: true,
                 required: true,
               }}
+            />
+            <TextInput
+              autoCapitalize={'none'}
+              inputLabel="Mobile"
+              keyboardType="mobile"
+              onValueChange={(mobile) => this.setState({
+                mobile
+              })}
+              textContentType="lastName"
+              textInputRef={this.mobileInput}
+
             />
             <TextInput
               autoCapitalize={'none'}
@@ -148,13 +185,13 @@ class LoginScene extends Component {
               block
               disabled={!isFormValid || this.state.isLoading}
               isLoading={this.state.isLoading}
-              onPress={this.onLogin}
+              onPress={this.onRegister}
               style={{
                 backgroundColor: COLOUR_GREEN,
                 marginTop: 40,
               }}
             >
-              {this.state.isLoading ? <ActivityIndicator /> : <NbText>Login</NbText>}
+              {this.state.isLoading ? <ActivityIndicator /> : <NbText>Register</NbText>}
             </Button>
           </Form>
         </Content>
@@ -163,8 +200,8 @@ class LoginScene extends Component {
   }
 }
 
-LoginScene.propTypes = {
+RegisterScene.propTypes = {
   navigation: PropTypes.any,
 };
 
-export default LoginScene;
+export default RegisterScene;

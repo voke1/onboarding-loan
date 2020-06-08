@@ -14,6 +14,19 @@ export default class Auth {
     })
   }
 
+  register(firstName, lastName, email, password) {
+    return this.apiRequester.post({
+      endpoint: 'signup',
+      body: {
+        firstName,
+        lastName,
+        email,
+        password
+      }
+    })
+  }
+
+
   login (email, password) {
     return this.apiRequester.post({
       endpoint: 'signin',

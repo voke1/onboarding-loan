@@ -5,6 +5,7 @@ import EditSME from './scenes/edit-sme';
 import HomeScene from './scenes/home';
 import LandingScene from './scenes/landing';
 import LoginScene from './scenes/login';
+import RegisterScene from './scenes/register';
 import OnboardNewSMEScene from './scenes/onboard-new-sme/scene';
 import SMEDetailsScene from './scenes/sme-details';
 import SplashScene from './scenes/splash';
@@ -36,6 +37,12 @@ const routes = createStackNavigator({
   },
   LoginScene: {
     screen: LoginScene,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  RegisterScene: {
+    screen: RegisterScene,
     navigationOptions: {
       header: null,
     },
