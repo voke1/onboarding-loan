@@ -1,3 +1,8 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-console */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { View } from 'react-native';
 import { DatePicker } from 'native-base';
@@ -8,7 +13,7 @@ export default class DateInput extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log('DEFAULT', props.defaultValue)
+    console.log('DEFAULT', props.defaultValue);
 
     this.state = {
       value: new Date(props.defaultValue),
@@ -28,7 +33,7 @@ export default class DateInput extends React.Component {
       this.setState({
         errorMessage: null,
         fieldIsValid: isValid,
-        value: date
+        value: date,
       });
       this.props.onDateSelect(date, isValid);
     }
@@ -38,8 +43,8 @@ export default class DateInput extends React.Component {
     if (nextProps.propagateError !== this.props.propagateError && validators.required) {
       this.state.value === null && this.setState({
         errorMessage: 'Field is required',
-        fieldIsValid: false
-      })
+        fieldIsValid: false,
+      });
 
       return true;
     }
@@ -51,55 +56,65 @@ export default class DateInput extends React.Component {
     console.log('BLURRED FORM DATE');
   }
 
-  render () {
-    return <View style={{
-      ...this.props.outerContainerStyle
-    }}>
-      
-      <Text style={{color: this.state.fieldIsValid === false ? COLOUR_RED : COLOUR_GREY}}>{this.props.inputLabel}</Text>
+  render() {
+    return (
       <View style={{
-        flexDirection: 'row'
-      }}>  
-        <DatePicker
-          cancelBtnText="Cancel"
-          confirmBtnText="Confirm"
-          customStyles={{
-            dateIcon: {
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 0
-            },
-            dateInput: {
-              marginLeft: 36
-            }
-            // ... You can check the source to find the other keys.
+        ...this.props.outerContainerStyle,
+      }}
+      >
+
+        <Text style={{ color: this.state.fieldIsValid === false ? COLOUR_RED : COLOUR_GREY }}>{this.props.inputLabel}</Text>
+        <View style={{
+          flexDirection: 'row',
+        }}
+        >
+          <DatePicker
+            cancelBtnText="Cancel"
+            confirmBtnText="Confirm"
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0,
+              },
+              dateInput: {
+                marginLeft: 36,
+              },
+              // ... You can check the source to find the other keys.
+            }}
+            defaultDate={this.state.value}
+            date={this.state.value}
+            format="YYYY-MM-DD"
+            maxDate={this.props.maxDate}
+            minDate={this.props.minDate}
+            mode="date"
+            onCloseModal={this.onBlur}
+            onDateChange={(date) => {
+              this.setState({
+                errorMessage: null,
+                fieldIsValid: true,
+                value: date,
+              });
+              this.props.onValueChange(date, true);
+            }}
+            placeholder={this.props.placeholder}
+            style={{ width: 200 }}
+          />
+        </View>
+        <Text
+          small
+          red
+          style={{
+            position: 'absolute',
+            textAlign: 'right',
+            top: 70,
+            width: '100%',
           }}
-          defaultDate={this.state.value}
-          date={this.state.value}
-          format="YYYY-MM-DD"
-          maxDate={this.props.maxDate}
-          minDate={this.props.minDate}
-          mode="date"
-          onCloseModal={this.onBlur}
-          onDateChange={(date) => {
-            this.setState({
-              errorMessage: null,
-              fieldIsValid: true,
-              value: date
-            })
-            this.props.onValueChange(date, true)
-          }}
-          placeholder={this.props.placeholder}
-          style={{width: 200}}
-        />
+        >
+          {this.state.errorMessage}
+        </Text>
       </View>
-      <Text small red style={{
-        position: 'absolute',
-        textAlign: 'right',
-        top: 70,
-        width: '100%',
-      }}>{this.state.errorMessage}</Text>
-    </View>
+    );
   }
 }
