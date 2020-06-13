@@ -26,7 +26,6 @@ export default class Auth {
     })
   }
 
-
   login (email, password) {
     return this.apiRequester.post({
       endpoint: 'signin',

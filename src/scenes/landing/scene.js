@@ -6,7 +6,6 @@ import {
   View,
 } from 'native-base';
 import PropTypes from 'prop-types';
-
 import BaseScene from '../base/scene';
 import Text from '../../components/text';
 import { COLOUR_TRANSPARENT, COLOUR_GREEN } from '../../constants/styles';
