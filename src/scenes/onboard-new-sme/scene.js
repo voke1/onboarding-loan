@@ -207,7 +207,8 @@ class OnboardNewSME extends React.Component {
     this.setState({
       isLoading: true
     });
-
+    
+    console.log('FORM FIELDS: ', this.state.form)
     const { status, response } = await this.sme.createSME(this.state.form);
     console.log('STATUS >> ', status);
     console.log('RESPONSE >> ', response);
