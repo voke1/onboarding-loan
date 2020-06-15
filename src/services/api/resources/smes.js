@@ -27,7 +27,7 @@ export default class SME {
 
   createSME(payload) {
     return this.apiRequester.post({
-      endpoint: 'smes',
+      endpoint: 'sme',
       body: payload,
     });
   }

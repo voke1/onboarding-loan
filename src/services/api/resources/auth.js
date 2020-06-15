@@ -44,7 +44,7 @@ export default class Auth {
 
   createSME (payload) {
     return this.apiRequester.post({
-      endpoint: 'smes',
+      endpoint: 'sme',
       body: payload
     })
   }
