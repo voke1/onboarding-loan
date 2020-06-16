@@ -60,7 +60,7 @@ const SMEStrip = (props) => {
             mid
             white
           >
-            {business_name[0]}
+            {business_name}
           </Text>
         </View>
         <View

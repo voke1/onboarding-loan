@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import AsyncStorage from '@react-native-community/async-storage';
 import Auth from '../services/api/resources/auth';
 import { SUCCESS_STATUS } from '../constants/api';
@@ -16,7 +17,6 @@ function currentTimestamp() {
 }
 
 export async function refreshAuthToken() {
-
   const refreshToken = await retrieveRefreshToken();
 
   const user = JSON.parse(await loadData(USER));
@@ -25,18 +25,16 @@ export async function refreshAuthToken() {
   const auth = new Auth();
   const { status, response, code } = await auth.login(
     refreshToken,
-    userEmail
+    userEmail,
   );
 
   console.log(status, response, code);
 
   if (status === SUCCESS_STATUS) {
     await saveAuthToken(response.data);
-  }
-
-  else {
-    return
-    await refreshAuthToken()
+  } else {
+    return;
+    await refreshAuthToken();
   }
 }
 
@@ -47,7 +45,7 @@ export async function deleteAuthToken() {
 
 export async function isAuthTokenExpired() {
   return false;
-  
+
   const rawAuthTokenExpiry = await AsyncStorage.getItem(AUTH_TOKEN_EXPIRY);
 
   if (rawAuthTokenExpiry === null) {
@@ -90,3 +88,30 @@ export async function saveAuthToken(token) {
 export async function saveRefreshToken(token) {
   AsyncStorage.setItem(REFRESH_TOKEN, token);
 }
+
+export const storeData = async (payload) => {
+  try {
+    await AsyncStorage.setItem('item',
+      JSON.stringify(payload),
+    );
+  } catch (error) {
+    // Error saving data
+    console.log(error);
+  }
+};
+
+export const retrieveData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('item');
+    if (value !== null) {
+      // We have data!!
+      const response = JSON.parse(value)
+
+      console.log(value);
+      return response;
+    }
+  } catch (error) {
+    // Error retrieving data
+    console.log(error);
+  }
+};

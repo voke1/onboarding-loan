@@ -37,8 +37,8 @@ import {
   COLOUR_GREEN_DARK,
   COLOUR_GREY,
   COLOUR_RED,
-  COLOUR_WHITE,
   COLOUR_YELLOW_LIGHT,
+  COLOUR_WHITE,
   WHITE_SPACING,
 } from '../../constants/styles';
 import SMEStrip from './components/sme-strip';
@@ -47,6 +47,7 @@ import SME from '../../services/api/resources/smes';
 import styles from './styles';
 import TextInput from '../../components/form-controls/text-input';
 import { ERROR_STATUS } from '../../constants/api';
+import {retrieveData } from '../../utils/auth';
 
 
 const HomeTab = (props) => {
@@ -60,7 +61,7 @@ const HomeTab = (props) => {
           animated
           backgroundColor={COLOUR_GREEN_DARK}
           barStyle="light-content"
-          // translucent
+        // translucent
         />
 
         <View
@@ -69,11 +70,11 @@ const HomeTab = (props) => {
           }}
         >
 
-          <Svg fill="none" height="110" width="130" style={{position: 'absolute', top: 0, right: 0}}>
-            <Path 
-              opacity="0.063399" 
-              d="M109 77C150.974 77 185 42.9736 185 1C185 -40.9736 150.974 -75 109 -75C67.0264 -75 33 -40.9736 33 1C33 42.9736 67.0264 77 109 77Z" 
-              stroke="white" 
+          <Svg fill="none" height="110" width="130" style={{ position: 'absolute', top: 0, right: 0 }}>
+            <Path
+              opacity="0.063399"
+              d="M109 77C150.974 77 185 42.9736 185 1C185 -40.9736 150.974 -75 109 -75C67.0264 -75 33 -40.9736 33 1C33 42.9736 67.0264 77 109 77Z"
+              stroke="white"
               strokeWidth="65" />
           </Svg>
           <Svg
@@ -81,7 +82,7 @@ const HomeTab = (props) => {
               position: 'absolute',
               top: 0,
               left: 0,
-            }} 
+            }}
             width="145"
             height="89"
             viewBox="0 0 145 89"
@@ -90,14 +91,14 @@ const HomeTab = (props) => {
           >
             <Path
               opacity="0.063399"
-              d="M36 56C77.9736 56 112 21.9736 112 -20C112 -61.9736 77.9736 -96 36 -96C-5.97364 -96 -40 -61.9736 -40 -20C-40 21.9736 -5.97364 56 36 56Z" 
+              d="M36 56C77.9736 56 112 21.9736 112 -20C112 -61.9736 77.9736 -96 36 -96C-5.97364 -96 -40 -61.9736 -40 -20C-40 21.9736 -5.97364 56 36 56Z"
               stroke="white"
               strokeWidth="65" />
           </Svg>
 
 
           {/* Beginning */}
-          <View style={{alignItems: 'flex-end'}}>
+          <View style={{ alignItems: 'flex-end' }}>
             <Collaborating />
           </View>
           {/* END */}
@@ -122,27 +123,27 @@ const HomeTab = (props) => {
           </Text>
         </View>
 
-        <Svg fill="none" height="110" width="130" style={{position: 'absolute', top: 200, right: 0}}>
-          <Path 
-            opacity="0.23399" 
-            d="M109 77C150.974 77 185 42.9736 185 1C185 -40.9736 150.974 -75 109 -75C67.0264 -75 33 -40.9736 33 1C33 42.9736 67.0264 77 109 77Z" 
-            stroke={'#d03c3f'} 
+        <Svg fill="none" height="110" width="130" style={{ position: 'absolute', top: 200, right: 0 }}>
+          <Path
+            opacity="0.23399"
+            d="M109 77C150.974 77 185 42.9736 185 1C185 -40.9736 150.974 -75 109 -75C67.0264 -75 33 -40.9736 33 1C33 42.9736 67.0264 77 109 77Z"
+            stroke={'#d03c3f'}
             strokeWidth="65" />
         </Svg>
 
-        <Svg 
-          width="92" 
-          height="132" 
+        <Svg
+          width="92"
+          height="132"
           viewBox="0 0 92 132"
-          xlink="http://www.w3.org/1999/xlink" 
-          xmlns="http://www.w3.org/2000/svg" 
+          xlink="http://www.w3.org/1999/xlink"
+          xmlns="http://www.w3.org/2000/svg"
           style={{
             opacity: .4,
             right: 0,
             position: 'absolute',
             top: 460
           }}>
-          <Path d="M66 115C93.062 115 115 93.062 115 66C115 38.938 93.062 17 66 17C38.938 17 17 38.938 17 66C17 93.062 38.938 115 66 115Z" fill="none" stroke="#00425F" strokeWidth="33"/>
+          <Path d="M66 115C93.062 115 115 93.062 115 66C115 38.938 93.062 17 66 17C38.938 17 17 38.938 17 66C17 93.062 38.938 115 66 115Z" fill="none" stroke="#00425F" strokeWidth="33" />
         </Svg>
 
         <Text
@@ -156,7 +157,7 @@ const HomeTab = (props) => {
           SMEs
         </Text>
 
-        <ScrollView 
+        <ScrollView
           horizontal
         >
           <Strip
@@ -187,9 +188,9 @@ const HomeTab = (props) => {
               shadowColor: COLOUR_WHITE,
             }}
             text={`View SMEs`}
-          textStyle={{
-            color: COLOUR_BLACK,
-          }}
+            textStyle={{
+              color: COLOUR_BLACK,
+            }}
           />
         </ScrollView>
 
@@ -303,16 +304,20 @@ class RegisteredSMEsTab extends React.Component {
       isLoading: true,
     });
 
-    const { response, status }  = await this.smes.getSMEs()
+    const { response, status } = await this.smes.getSMEs()
+    console.log('RESPONSE: ', response);
+    console.log('STATUS: ', status);
+
     if (status == ERROR_STATUS) {
       return
     }
 
     const { data } = response;
-    const smes = data.data;
+    const smes = response;
+    console.log("SMES: ", smes)
 
     console.log(smes)
-    
+
     this.setState({
       isLoading: false,
       smes,
@@ -348,14 +353,14 @@ class RegisteredSMEsTab extends React.Component {
           <Right
             onPress={this.refresh}
           >
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={this.refresh}
               style={{
                 alignItems: 'flex-end',
                 width: 200,
               }}
             >
-              <Icon 
+              <Icon
                 name="refresh"
                 style={{
                   color: COLOUR_WHITE,
@@ -390,7 +395,7 @@ class RegisteredSMEsTab extends React.Component {
           <Icon name="add" />
         </Fab>
       </BaseScene>
-    ); 
+    );
   }
 };
 
@@ -418,11 +423,11 @@ class ProfileTab extends React.Component {
 
     this.save = this.save.bind(this);
   }
-  
+
   componentDidMount() {
     this.loadData();
   }
-  
+
   addInvalidField(fieldName) {
     const newInvalidFields = [
       ...this.state.invalidFields,
@@ -464,8 +469,8 @@ class ProfileTab extends React.Component {
     this.setState({
       isLoading: true,
     });
-
-    const { status, response } = await this.profiles.getProfile();
+    const result = await retrieveData();
+    const { status, response } = await this.profiles.getProfile(result.email);
 
     if (status === ERROR_STATUS) {
       return
@@ -524,7 +529,7 @@ class ProfileTab extends React.Component {
 
     return (
       <BaseScene>
-        
+
         <Header
           androidStatusBarColor={COLOUR_GREEN_DARK}
           style={{
@@ -541,14 +546,14 @@ class ProfileTab extends React.Component {
           style={{
             padding: WHITE_SPACING * 2,
           }}
-        > 
+        >
           <TextInput
             autoCapitalize="words"
             defaultValue={this.state.form.name}
             inputLabel="Name"
             keyboardType="name"
             onValueChange={(name, isValid) => {
-              this.updateFormField({name});
+              this.updateFormField({ name });
               isValid === false ? this.addInvalidField('name') : this.removeInvalidField('name');
             }}
             propagateErrors={propagateFormErrors}
@@ -562,7 +567,7 @@ class ProfileTab extends React.Component {
             inputLabel="Email"
             keyboardType="email"
             onValueChange={(email, isValid) => {
-              this.updateFormField({email});
+              this.updateFormField({ email });
               isValid === false ? this.addInvalidField('email') : this.removeInvalidField('email');
             }}
             propagateErrors={propagateFormErrors}
@@ -603,29 +608,29 @@ export default createBottomTabNavigator({
   'Registered SMEs': RegisteredSMEsTab,
   Profile: ProfileTab,
 },
-{
-  defaultNavigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ focused, horizontal, tintColor }) => {
-      const { routeName } = navigation.state;
-      let IconComponent = Ionicons;
-      let iconName;
-      if (routeName === 'Home') {
-        iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-        // Sometimes we want to add badges to some icons.
-        // You can check the implementation below.
-        IconComponent = () => <Ionicons name="md-home" size={25} color={tintColor} />;
-      } else if (routeName === 'Registered SMEs') {
-        iconName = 'md-list';
-      } else if (routeName === 'Profile') {
-        iconName = 'md-person';
-      }
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let IconComponent = Ionicons;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+          // Sometimes we want to add badges to some icons.
+          // You can check the implementation below.
+          IconComponent = () => <Ionicons name="md-home" size={25} color={tintColor} />;
+        } else if (routeName === 'Registered SMEs') {
+          iconName = 'md-list';
+        } else if (routeName === 'Profile') {
+          iconName = 'md-person';
+        }
 
-      // You can return any component that you like here!
-      return <IconComponent name={iconName} size={25} color={tintColor} />;
+        // You can return any component that you like here!
+        return <IconComponent name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+    tabBarOptions: {
+      activeTintColor: COLOUR_GREEN,
+      inactiveTintColor: 'gray',
     },
-  }),
-  tabBarOptions: {
-    activeTintColor: COLOUR_GREEN,
-    inactiveTintColor: 'gray',
-  },
-});
+  });

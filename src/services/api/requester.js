@@ -104,16 +104,16 @@ export default class Requester {
 
   async get(params) {
     const {
-      endpoint, headers, args, auth,
+      endpoint, headers, args, auth, body,
     } = params;
-
+console.log('GET PARAMS: ', params);
     try {
       const response = await this._makeHttpRequest({
         url: this._getFullUrl(endpoint),
         method: GET_METHOD,
         headers,
         args,
-        body: null,
+        body,
         auth,
       });
 

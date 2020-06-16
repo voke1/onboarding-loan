@@ -2,7 +2,7 @@
 import Requester from '../requester'
 
 // const API_BASE_URL = 'http://167.99.237.136:8070/api';
-const API_BASE_URL = 'https://smes-app.herokuapp.com/api/v1/';
+const API_BASE_URL = 'https://smes-app.herokuapp.com/api/v1';
 
 export default class SME {
   constructor(props) {
@@ -15,7 +15,7 @@ export default class SME {
 
   getSMEs() {
     return this.apiRequester.get({
-      endpoint: 'smes',
+      endpoint: 'sme',
     });
   }
 

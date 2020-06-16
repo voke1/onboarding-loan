@@ -19,7 +19,6 @@ import {
   Toast,
 } from 'native-base';
 import PropTypes from 'prop-types';
-
 import BaseScene from '../base/scene';
 import TextInput from '../../components/form-controls/text-input';
 import { COLOUR_GREEN, COLOUR_GREEN_DARK } from '../../constants/styles';
@@ -27,7 +26,7 @@ import styles from './styles';
 import Text from '../../components/text';
 import Auth from '../../services/api/resources/auth';
 import { ERROR_STATUS } from '../../constants/api';
-import { saveAuthToken } from '../../utils/auth';
+import { storeData, retrieveData, saveAuthToken } from '../../utils/auth';
 
 class LoginScene extends Component {
   auth = new Auth();
@@ -58,7 +57,6 @@ class LoginScene extends Component {
       email,
       password
     )
-    console.log('STATUS: ', result)
 
     // const { error } = response
 
@@ -71,6 +69,7 @@ class LoginScene extends Component {
     else {
       // const { token } = response;
       // saveAuthToken(token);
+      storeData(result.response);
       navigation.replace('HomeScene');
     }
 
