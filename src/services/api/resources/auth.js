@@ -26,7 +26,7 @@ export default class Auth {
     })
   }
 
-  login (email, password) {
+  login(email, password) {
     return this.apiRequester.post({
       endpoint: 'signin',
       body: {
@@ -36,13 +36,13 @@ export default class Auth {
     })
   }
 
-  listParameters () {
+  listParameters() {
     return this.apiRequester.get({
       endpoint: 'domains'
     })
   }
 
-  createSME (payload) {
+  createSME(payload) {
     return this.apiRequester.post({
       endpoint: 'sme',
       body: payload

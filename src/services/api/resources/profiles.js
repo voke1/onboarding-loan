@@ -13,24 +13,25 @@ export default class Profile {
     })
   }
 
-  getProfile (email) {
-    console.log('GET PROFILE EMAIL: ', email)
+  getProfile(id) {
+    console.log('GET PROFILE EMAIL: ', id)
     return this.apiRequester.get({
-      endpoint: 'profile',
-      args: email
+      endpoint: `profile/${id}`,
+      args: id
     })
   }
 
-  updateProfile (payload) {
+  updateProfile(payload) {
     return this.apiRequester.put({
-      endpoint: 'profile',
+      endpoint: `profile/${payload.id}`,
       body: payload
     })
   }
 
-  updatePassword (payload) {
+  updatePassword(payload, email) {
+    console.log('PROFILE UPDATE PAYLOAD: ', payload)
     return this.apiRequester.put({
-      endpoint: 'profile/password',
+      endpoint: `profile/update/${email}`,
       body: payload
     })
   }

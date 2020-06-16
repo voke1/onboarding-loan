@@ -47,7 +47,7 @@ import SME from '../../services/api/resources/smes';
 import styles from './styles';
 import TextInput from '../../components/form-controls/text-input';
 import { ERROR_STATUS } from '../../constants/api';
-import {retrieveData } from '../../utils/auth';
+import { retrieveData } from '../../utils/auth';
 
 
 const HomeTab = (props) => {
@@ -475,10 +475,9 @@ class ProfileTab extends React.Component {
     if (status === ERROR_STATUS) {
       return
     }
-
     this.setState({
       form: {
-        ...response.data
+        ...response
       },
       isLoading: false,
     })
@@ -489,7 +488,7 @@ class ProfileTab extends React.Component {
       (value) => !Boolean(this.state.form[value])
     );
 
-    if (missingFields.length > 0 || this.state.invalidFields.length > 0) {
+    if (missingFields.length > 1 || this.state.invalidFields.length > 1) {
       this.setState({
         propagateFormErrors: true,
       });
@@ -502,8 +501,9 @@ class ProfileTab extends React.Component {
     });
 
     const { status, response } = await this.profiles.updateProfile({
-      id: this.state.form.id,
-      name: this.state.form.name,
+      id: this.state.form._id,
+      firstName: this.state.form.firstName,
+      lastName: this.state.form.lastName,
       email: this.state.form.email,
     });
 
@@ -549,12 +549,26 @@ class ProfileTab extends React.Component {
         >
           <TextInput
             autoCapitalize="words"
-            defaultValue={this.state.form.name}
-            inputLabel="Name"
+            defaultValue={this.state.form.firstName}
+            inputLabel="First Name"
             keyboardType="name"
-            onValueChange={(name, isValid) => {
-              this.updateFormField({ name });
-              isValid === false ? this.addInvalidField('name') : this.removeInvalidField('name');
+            onValueChange={(firstName, isValid) => {
+              this.updateFormField({ firstName });
+              isValid === false ? this.addInvalidField('firstName') : this.removeInvalidField('firstName');
+            }}
+            propagateErrors={propagateFormErrors}
+            validators={{
+              required: true,
+            }}
+          />
+          <TextInput
+            autoCapitalize="words"
+            defaultValue={this.state.form.lastName}
+            inputLabel="Last Name"
+            keyboardType="name"
+            onValueChange={(lastName, isValid) => {
+              this.updateFormField({ lastName });
+              isValid === false ? this.addInvalidField('lastName') : this.removeInvalidField('lastName');
             }}
             propagateErrors={propagateFormErrors}
             validators={{

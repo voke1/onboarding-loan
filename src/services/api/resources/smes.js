@@ -34,7 +34,7 @@ export default class SME {
 
   editSME(smeId, payload) {
     return this.apiRequester.put({
-      endpoint: `smes/${smeId}`,
+      endpoint: `sme/${smeId}`,
       body: payload,
     });
   }

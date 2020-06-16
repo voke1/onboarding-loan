@@ -25,6 +25,8 @@ import ActivityIndicator from '../../components/activity-indicator';
 import Profiles from '../../services/api/resources/profiles';
 import TextInput from '../../components/form-controls/text-input';
 import { ERROR_STATUS } from '../../constants/api';
+import { storeData, retrieveData } from '../../utils/auth';
+
 
 
 class ChangePasswordScene extends React.Component {
@@ -104,11 +106,12 @@ class ChangePasswordScene extends React.Component {
     this.setState({
       isLoading: true,
     });
+    const result = await retrieveData();
 
     const {
       response,
       status,
-    } = await this.profiles.updatePassword(this.state.form);
+    } = await this.profiles.updatePassword(this.state.form, result.email);
 
     this.setState({
       isLoading: false,

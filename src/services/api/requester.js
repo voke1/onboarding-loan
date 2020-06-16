@@ -106,7 +106,6 @@ export default class Requester {
     const {
       endpoint, headers, args, auth, body,
     } = params;
-console.log('GET PARAMS: ', params);
     try {
       const response = await this._makeHttpRequest({
         url: this._getFullUrl(endpoint),
@@ -136,6 +135,7 @@ console.log('GET PARAMS: ', params);
       endpoint, headers, body, args, auth,
     } = params;
 
+    console.log('BODY: ', body)
     try {
       const response = await this._makeHttpRequest({
         url: this._getFullUrl(endpoint),

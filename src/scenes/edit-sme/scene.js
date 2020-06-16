@@ -208,12 +208,12 @@ class EditSme extends React.Component {
       isLoading: true
     });
 
-    const { status, response } = await this.sme.editSME(this.smeData.id, {
+    const { status, response } = await this.sme.editSME(this.smeData._id, {
       ...this.smeData,
       ...this.state.form
     });
 
-    console.log(response)
+    console.log('SME RESPONSE: ', response)
 
     this.setState({
       isLoading: false
