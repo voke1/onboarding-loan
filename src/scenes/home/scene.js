@@ -7,6 +7,7 @@ import {
   StatusBar,
   TouchableOpacity,
   View,
+  StyleSheet
 } from 'react-native';
 import Svg, { Circle, Ellipse, Path, Polygon, Rect } from 'react-native-svg';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -48,6 +49,9 @@ import styles from './styles';
 import TextInput from '../../components/form-controls/text-input';
 import { ERROR_STATUS } from '../../constants/api';
 import { retrieveData } from '../../utils/auth';
+import { Card, CardItem } from 'native-base';
+import userImage from '../../assets/images/Union.png'
+
 
 
 const HomeTab = (props) => {
@@ -95,15 +99,11 @@ const HomeTab = (props) => {
               stroke="white"
               strokeWidth="65" />
           </Svg>
-
-
           {/* Beginning */}
           <View style={{ alignItems: 'flex-end' }}>
             <Collaborating />
           </View>
           {/* END */}
-
-
 
           <Text
             mid
@@ -130,7 +130,6 @@ const HomeTab = (props) => {
             stroke={'#d03c3f'}
             strokeWidth="65" />
         </Svg>
-
         <Svg
           width="92"
           height="132"
@@ -145,56 +144,94 @@ const HomeTab = (props) => {
           }}>
           <Path d="M66 115C93.062 115 115 93.062 115 66C115 38.938 93.062 17 66 17C38.938 17 17 38.938 17 66C17 93.062 38.938 115 66 115Z" fill="none" stroke="#00425F" strokeWidth="33" />
         </Svg>
-
-        <Text
-          bold
-          mid
-          title
-          style={{
-            padding: WHITE_SPACING
-          }}
-        >
-          SMEs
-        </Text>
-
-        <ScrollView
-          horizontal
-        >
-          <Strip
-            androidIcon="md-add"
-            iosIcon="ios-add"
-            onPress={() => navigation.navigate('OnboardNewSME')}
-            style={{
-              backgroundColor: COLOUR_GREEN,
-              borderRadius: 16,
-              flexDirection: 'row',
-              marginTop: 0,
-              shadowColor: COLOUR_GREEN,
-            }}
-            text={'Onboard SME'}
-          />
-          <Strip
-            androidIcon="md-list"
-            iconStyle={{
-              color: COLOUR_BLACK,
-            }}
-            iosIcon="ios-eye"
+        <View>
+          <TouchableOpacity
             onPress={() => navigation.navigate('Registered SMEs')}
-            style={{
-              backgroundColor: COLOUR_WHITE,
-              borderRadius: 16,
-              flexDirection: 'row',
-              marginTop: 0,
-              shadowColor: COLOUR_WHITE,
-            }}
-            text={`View SMEs`}
-            textStyle={{
-              color: COLOUR_BLACK,
-            }}
-          />
-        </ScrollView>
+          >
+            <Card style={{ marginTop: "9%", marginRight: '10%', marginLeft: '10%', alignItems: "center", height: 130 }}>
+              <View style={{ flex: 1, flexDirection: "row" }}>
+                <View style={{ marginTop: '10%' }}>
 
-        <Text
+                  <Text style={styles1.cardText1} >Total </Text>
+                  <Text style={styles1.cardText2} >90</Text>
+
+                </View>
+                <View style={styles1.dot1}>
+                  <Image
+                    style={{
+
+                      marginTop: '25%',
+                      marginLeft: '30%',
+                      height: 40,
+                      width: 30
+                    }}
+                    source={userImage}
+                  />
+                </View>
+
+              </View>
+
+            </Card>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Registered SMEs')}
+          >
+            <Card style={{ marginTop: '5%', marginRight: '10%', marginLeft: '10%', alignItems: "center", height: 130 }}>
+              <View style={{ flex: 1, flexDirection: "row" }}>
+                <View style={{ marginTop: '10%' }}>
+
+                  <Text style={styles1.cardText1} >Today </Text>
+                  <Text style={styles1.cardText2} >10</Text>
+
+                </View>
+                <View style={styles1.dot1}>
+                  <Image
+                    style={{
+
+                      marginTop: '25%',
+                      marginLeft: '30%',
+                      height: 40,
+                      width: 30
+                    }}
+                    source={userImage}
+                  />
+                </View>
+
+              </View>
+
+            </Card>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Registered SMEs')}
+          >
+            <Card style={{ marginTop: '5%', marginRight: '10%', marginLeft: '10%', alignItems: "center", height: 130 }}>
+              <View style={{ flex: 1, flexDirection: "row" }}>
+                <View style={{ marginTop: '10%' }}>
+
+                  <Text style={styles1.cardText1} >This Month </Text>
+                  <Text style={styles1.cardText2} >50</Text>
+
+                </View>
+                <View style={styles1.dot1}>
+                  <Image
+                    style={{
+
+                      marginTop: '25%',
+                      marginLeft: '30%',
+                      height: 40,
+                      width: 30
+                    }}
+                    source={userImage}
+                  />
+                </View>
+
+              </View>
+
+
+            </Card>
+          </TouchableOpacity>
+        </View>
+        {/* <Text
           bold
           mid
           title
@@ -203,8 +240,8 @@ const HomeTab = (props) => {
           }}
         >
           Profile
-        </Text>
-
+        </Text> */}
+        {/* 
         <ScrollView horizontal>
 
           <Strip
@@ -266,8 +303,16 @@ const HomeTab = (props) => {
               color: COLOUR_RED,
             }}
           />
-        </ScrollView>
+        </ScrollView> */}
       </ScrollView>
+      <Fab
+        onPress={() => navigation.navigate('OnboardNewSME')}
+        style={{
+          backgroundColor: COLOUR_GREEN,
+        }}
+      >
+        <Icon name="add" />
+      </Fab>
     </BaseScene>
   );
 };
@@ -648,3 +693,101 @@ export default createBottomTabNavigator({
       inactiveTintColor: 'gray',
     },
   });
+
+
+const styles1 = StyleSheet.create({
+
+  dot: {
+    backgroundColor: 'rgba(5, 25, 92, 0.25)',
+    width: 79,
+    height: 81,
+    marginTop: '3%',
+    // marginBottom: 3,
+    borderRadius: 68,
+    // marginLeft: '30%',
+  },
+
+  dot1: {
+    backgroundColor: COLOUR_GREEN,
+    width: 79,
+    height: 81,
+    marginTop: '7%',
+    // marginBottom: 3,
+    borderRadius: 68,
+    marginLeft: '30%',
+  },
+
+
+  text1: {
+    color: '#000000',
+    fontFamily: 'Nunito Sans',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    lineHeight: 19,
+    marginTop: '20%'
+  },
+  text2: {
+    color: 'rgba(0, 0, 0, 0.3)',
+    fontFamily: 'Nunito Sans',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    lineHeight: 19,
+    marginTop: '3%'
+  },
+  text3: {
+    color: '#05195C',
+    fontFamily: 'Nunito Sans',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    fontSize: 28,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    lineHeight: 38,
+  },
+  text4: {
+    color: 'rgba(0, 0, 0, 0.3)',
+    fontFamily: 'Nunito Sans',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    fontSize: 14,
+    fontWeight: 'bold',
+    lineHeight: 19,
+    marginTop: '3%'
+  },
+  cardText: {
+    color: '#000000',
+    fontFamily: 'Nunito Sans',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    lineHeight: 27,
+  },
+  cardText1: {
+    color: '#7E8EAA',
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    fontSize: 10,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    lineHeight: 20,
+  },
+  cardText2: {
+    color: '#000000',
+    fontFamily: 'Nunito Sans',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    lineHeight: 30,
+  },
+});

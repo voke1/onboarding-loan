@@ -56,7 +56,7 @@ const strip = (props) => {
           justifyContent: 'space-evenly',
         }}
       >
-        <Icon
+        {/* <Icon
           android={androidIcon}
           ios={iosIcon}
           style={{
@@ -67,14 +67,14 @@ const strip = (props) => {
             top: -25,
             left: -75,
           }}
-        />
+        /> */}
         <StripIcon
           android={androidIcon}
           ios={iosIcon}
           style={iconStyle}
         />
       
-        <Text
+        {/* <Text
           bold
           left
           style={{
@@ -86,14 +86,14 @@ const strip = (props) => {
           white
         >
           {text}
-        </Text>
-        {subtitle && (
+        </Text> */}
+        {/* {subtitle && (
           <Text
             grey
           >
             {subtitle}
           </Text>
-        )}
+        )} */}
       </View>
     </TouchableOpacity>
   );
