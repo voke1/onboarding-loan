@@ -148,7 +148,7 @@ const HomeTab = (props) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('Registered SMEs')}
           >
-            <Card style={{ marginTop: "9%", marginRight: '10%', marginLeft: '10%', alignItems: "center", height: 130 }}>
+            <Card style={{ marginTop: "9%", marginRight: '10%', marginLeft: '10%', alignItems: "center", height: 130, elevation: 30, }}>
               <View style={{ flex: 1, flexDirection: "row" }}>
                 <View style={{ marginTop: '10%' }}>
 
@@ -176,7 +176,7 @@ const HomeTab = (props) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('Registered SMEs')}
           >
-            <Card style={{ marginTop: '5%', marginRight: '10%', marginLeft: '10%', alignItems: "center", height: 130 }}>
+            <Card style={{ marginTop: '5%', marginRight: '10%', marginLeft: '10%', alignItems: "center", height: 130, elevation: 30, }}>
               <View style={{ flex: 1, flexDirection: "row" }}>
                 <View style={{ marginTop: '10%' }}>
 
@@ -224,86 +224,10 @@ const HomeTab = (props) => {
                     source={userImage}
                   />
                 </View>
-
               </View>
-
-
             </Card>
           </TouchableOpacity>
         </View>
-        {/* <Text
-          bold
-          mid
-          title
-          style={{
-            padding: WHITE_SPACING
-          }}
-        >
-          Profile
-        </Text> */}
-        {/* 
-        <ScrollView horizontal>
-
-          <Strip
-            androidIcon="md-settings"
-            iconStyle={{
-              color: COLOUR_BLACK,
-            }}
-            iosIcon="ios-settings"
-            onPress={() => navigation.navigate('Profile')}
-            style={{
-              backgroundColor: COLOUR_WHITE,
-              borderRadius: 16,
-              flexDirection: 'row',
-              marginTop: 0,
-              shadowColor: COLOUR_WHITE,
-            }}
-            text="Edit Profile"
-            textStyle={{
-              color: COLOUR_BLACK,
-            }}
-          />
-
-          <Strip
-            androidIcon="md-lock"
-            iconStyle={{
-              color: COLOUR_BLACK,
-            }}
-            iosIcon="ios-lock"
-            onPress={() => navigation.navigate('ChangePassword')}
-            style={{
-              backgroundColor: COLOUR_WHITE,
-              borderRadius: 16,
-              flexDirection: 'row',
-              marginTop: 0,
-              shadowColor: COLOUR_WHITE,
-            }}
-            text="Change Password"
-            textStyle={{
-              color: COLOUR_BLACK,
-            }}
-          />
-
-          <Strip
-            androidIcon="md-log-out"
-            iconStyle={{
-              color: COLOUR_RED,
-            }}
-            iosIcon="ios-log-out"
-            onPress={() => navigation.navigate('LoginScene')}
-            style={{
-              backgroundColor: COLOUR_WHITE,
-              borderRadius: 16,
-              flexDirection: 'row',
-              marginTop: 0,
-              shadowColor: COLOUR_WHITE,
-            }}
-            text="Log Out"
-            textStyle={{
-              color: COLOUR_RED,
-            }}
-          />
-        </ScrollView> */}
       </ScrollView>
       <Fab
         onPress={() => navigation.navigate('OnboardNewSME')}
