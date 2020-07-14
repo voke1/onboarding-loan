@@ -248,8 +248,6 @@ HomeTab.propTypes = {
 
 
 
-
-
 class RegisteredSMEsTab extends React.Component {
   smes = new SME();
 
